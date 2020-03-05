@@ -26,6 +26,19 @@ dl_verify() {
   echo $path
 }
 
+set_default_python() {
+  if command -v python 2> /dev/null; then
+    # Python is already in our path, nothing to do here.
+    return
+  elif command -v python3 > /dev/null; then
+    ln -s $(command -v python3) /usr/local/bin/python
+  elif command -v python2 > /dev/null; then
+    ln -s $(command -v python3) /usr/local/bin/python
+  else
+    1>&2 echo "No python executable found; quiting"; exit 1
+  fi
+}
+
 install_aws() {
   if ! command -v pip 2> /dev/null; then
     dl_verify https://raw.githubusercontent.com/pypa/get-pip/fee32c376da1ff6496a798986d7939cd51e1644f/get-pip.py efe99298f3fbb1f56201ce6b81d2658067d2f7d7dfc2d412e0d3cacc9a397c61
@@ -64,7 +77,7 @@ install_ccache() {
 cd /usr/local
 # NOTE: If we run these in parallel, we need to be careful about keeping the return
 #       codes. Running serial for now, because performance is not important here.
+set_default_python
 install_aws
 install_mvn
 install_ccache
-wait
