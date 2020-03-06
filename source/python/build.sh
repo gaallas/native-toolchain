@@ -39,7 +39,7 @@ if needs_build_package ; then
   CC=$(basename ${CC})
   CXX=$(basename ${CXX})
 
-  LDFLAGS= wrap ./configure --prefix=$LOCAL_INSTALL
+  LDFLAGS= wrap ./configure --prefix=$LOCAL_INSTALL --enable-unicode=ucs4
   wrap make -j${BUILD_THREADS:-4}
   wrap make install
   finalize_package_build $PACKAGE $PACKAGE_VERSION
