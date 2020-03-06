@@ -27,16 +27,10 @@ dl_verify() {
 }
 
 set_default_python() {
-  if command -v python 2> /dev/null; then
-    # Python is already in our path, nothing to do here.
-    return
-  elif command -v python3 > /dev/null; then
-    ln -s $(command -v python3) /usr/local/bin/python
-  elif command -v python2 > /dev/null; then
-    ln -s $(command -v python3) /usr/local/bin/python
-  else
-    1>&2 echo "No python executable found; quiting"; exit 1
+	if ! command -v python > /dev/null; then
+		alternatives --set python /usr/bin/python2
   fi
+	python -V > /dev/null
 }
 
 install_aws() {

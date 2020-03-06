@@ -4,6 +4,7 @@ RUN dnf -y install java-1.8.0-openjdk-devel
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN dnf -y install autoconf \
   automake \
+  annobin \
   bison \
   byacc \
   bzip2 \
@@ -18,6 +19,7 @@ RUN dnf -y install autoconf \
   gcc-c++ \
   git \
   glibc-devel \
+  java-1.8.0-openjdk-devel \
   krb5-devel \
   libevent-devel \
   libdb-devel \
