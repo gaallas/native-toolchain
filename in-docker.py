@@ -62,6 +62,7 @@ KNOWN_DOCKER_TAGS = {'impala-toolchain-debian7': 'ec2-package-debian-7',
                      'impala-toolchain-redhat7': 'ec2-package-centos-7',
                      'impala-toolchain-redhat8': 'ec2-package-centos-8',
                      'impala-toolchain-sles12': 'ec2-package-sles-12',
+                     'impala-toolchain-ubuntu1404': 'ec2-package-ubuntu-14-04',
                      'impala-toolchain-ubuntu1604': 'ec2-package-ubuntu-16-04',
                      'impala-toolchain-ubuntu1804': 'ec2-package-ubuntu-18-04'}
 
