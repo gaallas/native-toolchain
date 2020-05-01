@@ -5,6 +5,14 @@ COPY ./debian/8/sources.list /etc/apt/sources.list
 # This disables the check.
 COPY ./debian/8/99no-check-valid-until /etc/apt/apt.conf.d/
 
+# Automatically renew expired keys.
+# Based on the article https://linux-audit.com/how-to-solve-an-expired-key-keyexpired-with-apt/
+RUN if apt-key list|grep -i expired; then \
+    apt-key list | grep -i expired | tr -s ' ' | cut -d ' ' -f2 | cut -d '/' -f 2 | \
+    xargs -L1  apt-key adv --keyserver keys.gnupg.net --recv-keys; fi
+
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y autoconf \
       bison \
       build-essential \
